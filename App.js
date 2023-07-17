@@ -13,7 +13,11 @@ function App() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Posts' }} />
-          <Stack.Screen name="Post" component={PostScreen} options={{ title: 'Post' }} />
+          <Stack.Screen 
+            name="Post" 
+            component={PostScreen} 
+            options={({ route }) => ({ title: route.params.post.title })} 
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

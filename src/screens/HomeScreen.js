@@ -41,6 +41,7 @@ const HomeScreen = ({ navigation }) => {
           post={post}
           onDelete={handleDelete}
           onSaveEdit={handleSaveEdit}
+          navigation={navigation}
         />
       ))}
     </ScrollView>

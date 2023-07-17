@@ -1,10 +1,13 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const PostScreen = () => {
+const PostScreen = ({ route }) => {
+  const { post } = route.params;
+
   return (
     <View>
-      <Text>PostScreen</Text>
+      <Text>{ post.title }</Text>
+      <Text>{ post.body }</Text>
     </View>
   );
 };

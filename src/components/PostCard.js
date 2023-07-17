@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Card, Text, TextInput } from 'react-native-paper';
 
-const PostCard = ({ post, onDelete, onSaveEdit }) => {
+const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
   const [editing, setEditing] = useState(false);
   const [title, setTitle] = useState(post.title);
   const [body, setBody] = useState(post.body);
@@ -16,8 +16,12 @@ const PostCard = ({ post, onDelete, onSaveEdit }) => {
     setEditing(false);
   };
 
+  const handlePostPress = () => {
+    navigation.navigate('Post', { post });
+  };
+
   return (
-    <Card style={styles.card}>
+    <Card onPress={handlePostPress} style={styles.card}>
       {editing ? (
         <>
           <TextInput 

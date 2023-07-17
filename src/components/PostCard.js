@@ -12,6 +12,9 @@ const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
   };
 
   const handleSave = () => {
+    if (!title || !body) {
+      return alert('Please fill all fields!');
+    }
     onSaveEdit(post.id, title, body);
     setEditing(false);
   };

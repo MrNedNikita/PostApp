@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Card, Text, TextInput } from 'react-native-paper';
 
-const PostCard = ({ post, onDelete, onSave }) => {
+const PostCard = ({ post, onDelete, onSaveEdit }) => {
   const [editing, setEditing] = useState(false);
   const [title, setTitle] = useState(post.title);
   const [body, setBody] = useState(post.body);
@@ -12,7 +12,7 @@ const PostCard = ({ post, onDelete, onSave }) => {
   };
 
   const handleSave = () => {
-    onSave(post.id, title, body);
+    onSaveEdit(post.id, title, body);
     setEditing(false);
   };
 
@@ -59,29 +59,9 @@ const styles = StyleSheet.create({
     padding: 16,
     marginBottom: 16,
   },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  body: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  editButton: {
-    color: 'blue',
-    marginBottom: 4,
-  },
-  deleteButton: {
-    color: 'red',
-  },
   input: {
     borderBottomWidth: 1,
     marginBottom: 12,
-  },
-  saveButton: {
-    fontSize: 16,
-    color: 'green',
   },
 });
 

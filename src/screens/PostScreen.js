@@ -1,42 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Comment from '../components/Comment';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Text, TextInput, Card } from 'react-native-paper';
+import { addComment, deleteComment, editComment, fetchComments } from '../store/actions/commentActions.js';
 
 const PostScreen = ({ route }) => {
   const { post } = route.params;
-  const [comments, setComments] = useState([]);
+  // const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState('');
+  const comments = useSelector((state) => {
+    return state.comments.filter((comment) => comment.postId === post.id)
+  });
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(fetchComments());
+  // }, [dispatch]);
 
   const handleAddComment = () => {
     if (!commentText) {
       return alert('Please fill all fields!');
     }
-    const newComment = {
-      id: new Date().getTime(),
-      text: commentText,
-      postId: post.id,
-    };
-    setComments([newComment, ...comments]);
+    // const newComment = {
+    //   id: new Date().getTime(),
+    //   text: commentText,
+    //   postId: post.id,
+    // };
+    // setComments([newComment, ...comments]);
+    dispatch(addComment(post.id, commentText));
     setCommentText('');
   };
 
   const handleDeleteComment = (id) => {
-    setComments(comments.filter((comment) => comment.id !== id));
+    // setComments(comments.filter((comment) => comment.id !== id));
+    dispatch(deleteComment(id))
   };
 
   const handleSaveEditComment = (id, text) => {
-    setComments(
-      comments.map((comment) => {
-        if (comment.id === id) {
-          return {
-            ...comment,
-            text: text,
-          };
-        }
-        return comment;
-      })
-    );
+    // setComments(
+    //   comments.map((comment) => {
+    //     if (comment.id === id) {
+    //       return {
+    //         ...comment,
+    //         text: text,
+    //       };
+    //     }
+    //     return comment;
+    //   })
+    // );
+    dispatch(editComment(id, text));
   };
 
   return (

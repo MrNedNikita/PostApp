@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import Comment from '../components/Comment';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Text, TextInput, Card } from 'react-native-paper';
@@ -22,18 +22,20 @@ const PostScreen = ({ route }) => {
     if (!commentText) {
       return alert('Please fill all fields!');
     }
-    // const newComment = {
-    //   id: new Date().getTime(),
-    //   text: commentText,
-    //   postId: post.id,
-    // };
+    const newComment = {
+      id: new Date().getTime(),
+      text: commentText,
+      postId: post.id,
+    };
     // setComments([newComment, ...comments]);
-    dispatch(addComment(post.id, commentText));
+    // const id = new Date().getTime();
+    dispatch(addComment(newComment));
     setCommentText('');
   };
 
   const handleDeleteComment = (id) => {
     // setComments(comments.filter((comment) => comment.id !== id));
+    console.warn(id);
     dispatch(deleteComment(id))
   };
 
@@ -53,7 +55,7 @@ const PostScreen = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>{post.title}</Text>
       <Text style={styles.body}>{post.body}</Text>
       <Card style={styles.commentForm}>
@@ -76,7 +78,7 @@ const PostScreen = ({ route }) => {
           onSaveEdit={handleSaveEditComment}
         />
       ))}
-    </View>
+    </ScrollView>
   );
 };
 

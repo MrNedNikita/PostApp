@@ -7,6 +7,7 @@ const Comment = ({ comment, onDelete, onSaveEdit }) => {
   const [text, setText] = useState(comment.text);
 
   const handleEdit = () => {
+    console.warn(comment.id)
     setEditing(true);
   };
 
@@ -16,6 +17,10 @@ const Comment = ({ comment, onDelete, onSaveEdit }) => {
     }
     onSaveEdit(comment.id, text);
     setEditing(false);
+  };
+
+  const handleDelete = () => {
+    onDelete(comment.id);
   };
 
   const handleCancel = () => {
@@ -45,7 +50,7 @@ const Comment = ({ comment, onDelete, onSaveEdit }) => {
           </Card.Content>
           <Card.Actions>
             <Button onPress={handleEdit}>Edit</Button>
-            <Button onPress={() => onDelete(comment.id)}>Delete</Button>
+            <Button onPress={handleDelete}>Delete</Button>
           </Card.Actions>
         </View>
       )}

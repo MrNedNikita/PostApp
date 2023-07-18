@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPosts, addPost, deletePost, editPost } from '../store/actions/postActions.js';
+import { fetchComments } from '../store/actions/commentActions.js';
 import PostCard from '../components/PostCard';
 import FormCard from '../components/FormCard';
 
@@ -14,6 +15,7 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(fetchPosts());
+    dispatch(fetchComments());
   }, [dispatch]);
 
   const handleAddPost = (title, body) => {

@@ -5,16 +5,28 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 
-const API_BASE_URL = 'https://my-json-server.typicode.com/MrNedNikita/PostApp/blob/main';
+const API_BASE_URL = 'http://localhost:3000';
 
-export const fetchComments = () => async (dispatch) => {
-  const response = await axios.get(`${API_BASE_URL}/comments`);
-  dispatch({ type: FETCH_COMMENTS, payload: response.data });
+export const fetchComments = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/comments`);
+      dispatch({ type: FETCH_COMMENTS, payload: response.data });
+    } catch (error) {
+      console.error('Error fetching comments:', error);
+    }
+  };
 };
 
-export const addComment = (postId, text) => async (dispatch) => {
-  const response = await axios.post(`${API_BASE_URL}/comments`, { postId, text });
-  dispatch({ type: ADD_COMMENT, payload: response.data });
+export const addComment = (id, text, postId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/comments`, { id, text, postId });
+      dispatch({ type: ADD_COMMENT, payload: response.data });
+    } catch (error) {
+      console.error('Error adding comment:', error);
+    }
+  };
 };
 
 export const deleteComment = (id) => async (dispatch) => {

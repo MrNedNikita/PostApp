@@ -22,14 +22,14 @@ const PostScreen = ({ route }) => {
     if (!commentText) {
       return alert('Please fill all fields!');
     }
-    const newComment = {
-      id: new Date().getTime(),
-      text: commentText,
-      postId: post.id,
-    };
+    // const newComment = {
+    //   id: new Date().getTime(),
+    //   text: commentText,
+    //   postId: post.id,
+    // };
     // setComments([newComment, ...comments]);
-    // const id = new Date().getTime();
-    dispatch(addComment(newComment));
+    const id = new Date().getTime();
+    dispatch(addComment(id, commentText, post.id));
     setCommentText('');
   };
 

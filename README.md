@@ -27,28 +27,18 @@ npm install
 ```
 4. Start the React Native development server:
 ```
-npx react-native start
+npm start
 ```
-5. Run the app on your Android device or emulator:
+5. Run the app 
+- on your android emulator:
 ```
-npx react-native run-android
+expo start --android
 ```
-The app should now be installed and running on your Android device or emulator.
+- on your ios emulator: 
+```
+expo start --ios
+```
+The app should now be installed and running on your emulator.
 
-## Usage
-
-Once the app is installed, you will see a list of posts on the home screen. Click on a post card to view its details and comments. You can also add, edit, and delete posts and comments.
-
-To add a new post, click on the "Add Post" button on the home screen and fill in the title and body for the new post. Click on "Save" to add the post.
-
-To edit a post, click on the "Edit" button on the post card. The post's title and body will become editable. Make the necessary changes and click on "Save" to update the post.
-
-To delete a post, click on the "Delete" button on the post card. The post will be deleted from the list.
-
-To add a comment to a post, scroll down to the comment section on the post details screen. Enter your comment in the input field and click on the "Add Comment" button to add it.
-
-To edit a comment, click on the "Edit" button on the comment block. The comment text will become editable. Make the necessary changes and click on "Save" to update the comment.
-
-To delete a comment, click on the "Delete" button on the comment block. The comment will be deleted.
 
 

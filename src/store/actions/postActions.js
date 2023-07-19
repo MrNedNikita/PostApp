@@ -5,8 +5,9 @@ export const ADD_POST = 'ADD_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const EDIT_POST = 'EDIT_POST';
 
-const API_BASE_URL = 'https://my-json-server.typicode.com/MrNedNikita/fakeServer';
-// const API_BASE_URL = 'http://localhost:3000';
+// const API_BASE_URL = 'https://my-json-server.typicode.com/MrNedNikita/PostApp/blob/main';
+// const API_BASE_URL = 'https://my-json-server.typicode.com/MrNedNikita/fakeServer';
+const API_BASE_URL = 'http://localhost:3000';
 
 export const fetchPosts = () => async (dispatch) => {
   const response = await axios.get(`${API_BASE_URL}/posts`);

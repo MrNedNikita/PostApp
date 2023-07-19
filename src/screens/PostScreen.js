@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import Comment from '../components/Comment';
 import { createSelector } from 'reselect';
@@ -20,6 +20,10 @@ const PostScreen = ({ route }) => {
 
   const comments = useSelector((state) => selectPostComments(state, post.id));
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(fetchComments());
+  // }, [dispatch]);
 
   const handleAddComment = () => {
     if (!commentText) {

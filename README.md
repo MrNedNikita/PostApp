@@ -17,24 +17,28 @@ Before proceeding with the installation, make sure you have Node.js, npm, React 
 
 git clone https://github.com/your_username/MyFakeServerApp.git
 
-git clone https://github.com/your_username/MyFakeServerApp.git
-Navigate to the project directory:
+2. Navigate to the project directory:
 
 cd MyFakeServerApp
-Install the project dependencies:
+
+3. Install the project dependencies:
 
 npm install
-Start the React Native development server:
+
+4. Start the React Native development server:
 
 npx react-native start
-Connect your Android device or start an Android emulator.
 
-Run the app on your Android device or emulator:
+5.Connect your Android device or start an Android emulator.
+
+6. Run the app on your Android device or emulator:
 
 npx react-native run-android
+
 The app should now be installed and running on your Android device or emulator.
 
-Usage
+## Usage
+
 Once the app is installed, you will see a list of posts on the home screen. Click on a post card to view its details and comments. You can also add, edit, and delete posts and comments.
 
 To add a new post, click on the "Add Post" button on the home screen and fill in the title and body for the new post. Click on "Save" to add the post.

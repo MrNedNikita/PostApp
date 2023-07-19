@@ -70,33 +70,33 @@ const PostScreen = ({ route }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: '#f5f5f5',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  body: {
-    fontSize: 16,
-    marginBottom: 16,
-  },
-  commentForm: {
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    padding: 16,
-    marginBottom: 16,
-  },
-  input: {
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
-    marginBottom: 12,
-    paddingHorizontal: 8,
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     padding: 16,
+//     backgroundColor: '#f5f5f5',
+//   },
+//   title: {
+//     fontSize: 20,
+//     fontWeight: 'bold',
+//     marginBottom: 8,
+//   },
+//   body: {
+//     fontSize: 16,
+//     marginBottom: 16,
+//   },
+//   commentForm: {
+//     backgroundColor: '#fff',
+//     borderRadius: 8,
+//     padding: 16,
+//     marginBottom: 16,
+//   },
+//   input: {
+//     borderBottomWidth: 1,
+//     borderColor: '#ccc',
+//     marginBottom: 12,
+//     paddingHorizontal: 8,
+//   },
+// });
 
 export default PostScreen;

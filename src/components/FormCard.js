@@ -41,16 +41,16 @@ const FormCard = ({ onAddPost }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    padding: 16,
-    marginBottom: 16,
-  },
-  input: {
-    marginBottom: 16,
-  },
-});
+// const styles = StyleSheet.create({
+//   card: {
+//     backgroundColor: '#fff',
+//     borderRadius: 8,
+//     padding: 16,
+//     marginBottom: 16,
+//   },
+//   input: {
+//     marginBottom: 16,
+//   },
+// });
 
 export default FormCard;

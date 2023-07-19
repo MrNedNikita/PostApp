@@ -57,21 +57,21 @@ const Comment = ({ comment, onDelete, onSaveEdit }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  comment: {
-    borderRadius: 8,
-    padding: 16,
-    marginBottom: 8,
-  },
-  text: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  input: {
-    borderBottomWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 8,
-  },
-});
+// const styles = StyleSheet.create({
+//   comment: {
+//     borderRadius: 8,
+//     padding: 16,
+//     marginBottom: 8,
+//   },
+//   text: {
+//     fontSize: 16,
+//     marginBottom: 8,
+//   },
+//   input: {
+//     borderBottomWidth: 1,
+//     marginBottom: 12,
+//     paddingHorizontal: 8,
+//   },
+// });
 
 export default Comment;

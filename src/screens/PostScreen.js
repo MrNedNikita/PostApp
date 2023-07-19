@@ -56,9 +56,9 @@ const PostScreen = ({ route }) => {
 
   return (
     <ScrollView style={styles.container}>
+      <Card style={styles.commentForm}>
       <Text style={styles.title}>{post.title}</Text>
       <Text style={styles.body}>{post.body}</Text>
-      <Card style={styles.commentForm}>
         <TextInput
           mode="outlined"
           style={styles.input}

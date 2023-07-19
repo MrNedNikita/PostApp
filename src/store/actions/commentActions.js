@@ -5,8 +5,8 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 
-// const API_BASE_URL = 'https://my-json-server.typicode.com/MrNedNikita/PostApp/blob/main';
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'https://my-json-server.typicode.com/MrNedNikita/fakeServer';
+// const API_BASE_URL = 'http://localhost:3000';
 
 export const fetchComments = () => {
   return async (dispatch) => {

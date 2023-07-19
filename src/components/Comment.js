@@ -7,7 +7,6 @@ const Comment = ({ comment, onDelete, onSaveEdit }) => {
   const [text, setText] = useState(comment.text);
 
   const handleEdit = () => {
-    console.warn(comment.id)
     setEditing(true);
   };
 

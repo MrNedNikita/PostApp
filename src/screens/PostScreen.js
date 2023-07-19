@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import Comment from '../components/Comment';
+import { createSelector } from 'reselect';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Text, TextInput, Card } from 'react-native-paper';
 import { addComment, deleteComment, editComment, fetchComments } from '../store/actions/commentActions.js';
@@ -8,9 +9,16 @@ import { addComment, deleteComment, editComment, fetchComments } from '../store/
 const PostScreen = ({ route }) => {
   const { post } = route.params;
   const [commentText, setCommentText] = useState('');
-  const comments = useSelector((state) => {
-    return state.comments.filter((comment) => comment.postId === post.id)
-  });
+  // const comments = useSelector((state) => {
+  //   return state.comments.filter((comment) => comment.postId === post.id)
+  // });
+  const selectPostComments = createSelector(
+    (state) => state.comments,
+    (_, postId) => postId,
+    (comments, postId) => comments.filter((comment) => comment.postId === postId)
+  );
+
+  const comments = useSelector((state) => selectPostComments(state, post.id));
   const dispatch = useDispatch();
 
   const handleAddComment = () => {

@@ -18,21 +18,21 @@ Before proceeding with the installation, make sure you have Node.js, npm, React 
 git clone https://github.com/your_username/MyFakeServerApp.git
 ```
 2. Navigate to the project directory:
-
+```
 cd MyFakeServerApp
-
+```
 3. Install the project dependencies:
-
+```
 npm install
-
+```
 4. Start the React Native development server:
-
+```
 npx react-native start
-
+```
 5. Run the app on your Android device or emulator:
-
+```
 npx react-native run-android
-
+```
 The app should now be installed and running on your Android device or emulator.
 
 ## Usage

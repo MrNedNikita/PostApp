@@ -27,7 +27,7 @@ const PostScreen = ({ route }) => {
   };
 
   const handleSaveEditComment = (id, text) => {
-    dispatch(editComment(id, text));
+    dispatch(editComment(id, text, post.id));
   };
 
   return (
@@ -43,7 +43,7 @@ const PostScreen = ({ route }) => {
           onChangeText={(text) => setCommentText(text)}
         />
         <Button style={styles.addButton} onPress={handleAddComment}>
-          Add Comment
+          Send Comment
         </Button>
       </Card>
       {comments.map((comment) => (

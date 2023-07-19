@@ -35,7 +35,7 @@ export const deleteComment = (id) => async (dispatch) => {
   dispatch({ type: DELETE_COMMENT, payload: id });
 };
 
-export const editComment = (id, text) => async (dispatch) => {
-  await axios.put(`${API_BASE_URL}/comments/${id}`, { text });
-  dispatch({ type: EDIT_COMMENT, payload: { id, text } });
+export const editComment = (id, text, postId) => async (dispatch) => {
+  await axios.put(`${API_BASE_URL}/comments/${id}`, { text, postId });
+  dispatch({ type: EDIT_COMMENT, payload: { id, text, postId } });
 };

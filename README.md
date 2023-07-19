@@ -14,9 +14,9 @@ This is a React Native application that allows users to view and interact with p
 Before proceeding with the installation, make sure you have Node.js, npm, React Native CLI, Android SDK, and JDK installed on your computer.
 
 1. Clone this repository to your local machine:
-
+```
 git clone https://github.com/your_username/MyFakeServerApp.git
-
+```
 2. Navigate to the project directory:
 
 cd MyFakeServerApp
@@ -29,9 +29,7 @@ npm install
 
 npx react-native start
 
-5.Connect your Android device or start an Android emulator.
-
-6. Run the app on your Android device or emulator:
+5. Run the app on your Android device or emulator:
 
 npx react-native run-android
 

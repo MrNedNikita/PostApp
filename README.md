@@ -15,11 +15,11 @@ Before proceeding with the installation, make sure you have Node.js, npm, React 
 
 1. Clone this repository to your local machine:
 ```
-git clone https://github.com/your_username/MyFakeServerApp.git
+git clone https://github.com/MrNedNikita/PostApp.git
 ```
 2. Navigate to the project directory:
 ```
-cd MyFakeServerApp
+cd PostApp
 ```
 3. Install the project dependencies:
 ```

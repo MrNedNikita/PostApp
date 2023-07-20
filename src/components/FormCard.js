@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginBottom: 16,
+    backgroundColor: '#F8F8F8',
   },
 });
 

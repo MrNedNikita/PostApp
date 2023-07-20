@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, Card, Text, TextInput } from 'react-native-paper';
+import { View, StyleSheet, Text } from 'react-native';
+import { Button, Card, TextInput } from 'react-native-paper';
 
 const Comment = ({ comment, onDelete, onSaveEdit }) => {
   const [editing, setEditing] = useState(false);
@@ -62,13 +62,15 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     marginBottom: 8,
+    backgroundColor: '#fff',
   },
   text: {
     fontSize: 16,
     marginBottom: 8,
+    color: '#000',
   },
   input: {
-    borderBottomWidth: 1,
+    backgroundColor: '#F8F8F8',
     marginBottom: 12,
     paddingHorizontal: 8,
   },

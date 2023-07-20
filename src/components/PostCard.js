@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
-import { Button, Card, Text, TextInput } from 'react-native-paper';
+import { StyleSheet, Text } from 'react-native';
+import { Button, Card, TextInput } from 'react-native-paper';
 
 const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
   const [editing, setEditing] = useState(false);
@@ -47,7 +47,7 @@ const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
         <>
           <Card.Title title={title} />
           <Card.Content>
-            <Text variant="bodyMedium">{body}</Text>
+            <Text>{body}</Text>
           </Card.Content>
           <Card.Actions>
             <Button onPress={() => onDelete(post.id)}>Delete</Button>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   input: {
-    borderBottomWidth: 1,
+    backgroundColor: '#F8F8F8',
     marginBottom: 12,
   },
 });

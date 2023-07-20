@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, ScrollView, Text } from 'react-native';
 import Comment from '../components/Comment';
 import { createSelector } from 'reselect';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Text, TextInput, Card } from 'react-native-paper';
-import { addComment, deleteComment, editComment, fetchComments } from '../store/actions/commentActions.js';
+import { Button, TextInput, Card } from 'react-native-paper';
+import { addComment, deleteComment, editComment } from '../store/actions/commentActions.js';
 
 const PostScreen = ({ route }) => {
   const { post } = route.params;
   const [commentText, setCommentText] = useState('');
-  // const comments = useSelector((state) => {
-  //   return state.comments.filter((comment) => comment.postId === post.id)
-  // });
   const selectPostComments = createSelector(
     (state) => state.comments,
     (_, postId) => postId,
@@ -20,10 +17,6 @@ const PostScreen = ({ route }) => {
 
   const comments = useSelector((state) => selectPostComments(state, post.id));
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(fetchComments());
-  // }, [dispatch]);
 
   const handleAddComment = () => {
     if (!commentText) {
@@ -80,10 +73,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 8,
+    color: '#000',
   },
   body: {
     fontSize: 16,
     marginBottom: 16,
+    color: '#000',
   },
   commentForm: {
     backgroundColor: '#fff',
@@ -92,8 +87,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   input: {
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
+    backgroundColor: '#F8F8F8',
     marginBottom: 12,
     paddingHorizontal: 8,
   },

@@ -40,5 +40,9 @@ expo start --ios
 ```
 The app should now be installed and running on your emulator.
 
+## Download
 
+You can downloaded PostApp on your Android device using this link: 
+
+https://expo.dev/artifacts/eas/3KvrQBMsEMUpYcnM25BFVk.apk
 

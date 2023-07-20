@@ -59,18 +59,18 @@ const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
   );
 };
 
-// const styles = StyleSheet.create({
-//   card: {
-//     backgroundColor: '#fff',
-//     borderRadius: 8,
-//     padding: 16,
-//     marginBottom: 16,
-//   },
-//   input: {
-//     borderBottomWidth: 1,
-//     marginBottom: 12,
-//   },
-// });
+const styles = StyleSheet.create({
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 16,
+  },
+  input: {
+    borderBottomWidth: 1,
+    marginBottom: 12,
+  },
+});
 
 export default PostCard;
 

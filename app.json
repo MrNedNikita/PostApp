@@ -2,7 +2,7 @@
   "expo": {
     "name": "PostApp",
     "slug": "PostApp",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -31,6 +31,12 @@
       "eas": {
         "projectId": "982e04d8-c616-4f14-89d8-1be5bf38d7ce"
       }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/982e04d8-c616-4f14-89d8-1be5bf38d7ce"
     }
   }
 }

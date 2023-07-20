@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPosts, addPost, deletePost, editPost } from '../store/actions/postActions.js';
 import { fetchComments } from '../store/actions/commentActions.js';
@@ -30,17 +30,19 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView style={styles.container} scrollVerticalScrollIndicator={false}>
-      <FormCard onAddPost={handleAddPost} />
-      {posts.map((post) => (
-        <PostCard
-          key={post.id}
-          post={post}
-          onDelete={handleDelete}
-          onSaveEdit={handleSaveEdit}
-          navigation={navigation}
-        />
-      ))}
+    <ScrollView scrollVerticalScrollIndicator={false}>
+      <View style={styles.container}>
+        <FormCard onAddPost={handleAddPost} />
+        {posts.map((post) => (
+          <PostCard
+            key={post.id}
+            post={post}
+            onDelete={handleDelete}
+            onSaveEdit={handleSaveEdit}
+            navigation={navigation}
+          />
+        ))}
+      </View>
     </ScrollView>
   );
 };
@@ -50,6 +52,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: '#f5f5f5',
+    marginBottom: 20,
   },
 });
 

@@ -32,6 +32,7 @@ const Comment = ({ comment, onDelete, onSaveEdit }) => {
       {editing ? (
         <View>
           <TextInput
+            textColor="#000"
             mode="outlined"
             style={styles.input}
             value={text}
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
   comment: {
     borderRadius: 8,
     padding: 16,
-    marginBottom: 8,
+    marginBottom: 14,
     backgroundColor: '#fff',
   },
   text: {

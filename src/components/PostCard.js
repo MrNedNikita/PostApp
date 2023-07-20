@@ -29,12 +29,14 @@ const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
         <>
           <TextInput 
             mode="outlined" 
+            textColor="#000"
             style={styles.input} 
             value={title} 
             onChangeText={text => setTitle(text)} 
           />
           <TextInput 
-            mode="outlined"  
+            mode="outlined" 
+            textColor="#000" 
             style={styles.input} 
             value={body} 
             onChangeText={text => setBody(text)} 
@@ -45,7 +47,7 @@ const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
         </>
       ) : (
         <>
-          <Card.Title title={title} />
+          <Text style={styles.title}>{title}</Text>
           <Card.Content>
             <Text>{body}</Text>
           </Card.Content>
@@ -69,6 +71,12 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: '#F8F8F8',
     marginBottom: 12,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    marginLeft: 14,
   },
 });
 

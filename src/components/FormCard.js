@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { Card, TextInput, Button } from "react-native-paper";
 
 const FormCard = ({ onAddPost }) => {
@@ -17,11 +17,12 @@ const FormCard = ({ onAddPost }) => {
 
   return (
     <Card style={styles.card}>
-      <Card.Title title="Add Post" />
+      <Text color="red" style={styles.title}>Add Post</Text>
       <Card.Content>
         <TextInput
           label="Title"
           mode="outlined"
+          textColor="#000"
           style={styles.input}
           value={title}
           onChangeText={text => setTitle(text)}
@@ -29,14 +30,13 @@ const FormCard = ({ onAddPost }) => {
         <TextInput
           label="Body"
           mode="outlined"
+          textColor="#000"
           style={styles.input}
           value={body}
           onChangeText={text => setBody(text)}
         />
       </Card.Content>
-      <Card.Actions>
-        <Button onPress={handleAddPost}>Add Post</Button>
-      </Card.Actions>
+      <Button onPress={handleAddPost}>Add Post</Button>
     </Card>
   );
 };
@@ -51,6 +51,14 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: 16,
     backgroundColor: '#F8F8F8',
+    color: '#000',
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    margin: 14,
+    color: '#000',
+
   },
 });
 

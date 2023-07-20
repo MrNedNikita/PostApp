@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, ScrollView, Text } from 'react-native';
+import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import Comment from '../components/Comment';
 import { createSelector } from 'reselect';
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,29 +36,32 @@ const PostScreen = ({ route }) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <Card style={styles.commentForm}>
-      <Text style={styles.title}>{post.title}</Text>
-      <Text style={styles.body}>{post.body}</Text>
-        <TextInput
-          mode="outlined"
-          style={styles.input}
-          placeholder="Enter your comment"
-          value={commentText}
-          onChangeText={(text) => setCommentText(text)}
-        />
-        <Button style={styles.addButton} onPress={handleAddComment}>
-          Send Comment
-        </Button>
-      </Card>
-      {comments.map((comment) => (
-        <Comment
-          key={comment.id}
-          comment={comment}
-          onDelete={handleDeleteComment}
-          onSaveEdit={handleSaveEditComment}
-        />
-      ))}
+    <ScrollView>
+      <View style={styles.container}>
+        <Card style={styles.commentForm}>
+          <Text style={styles.title}>{post.title}</Text>
+          <Text style={styles.body}>{post.body}</Text>
+          <TextInput
+            mode="outlined"
+            textColor="#000"
+            style={styles.input}
+            placeholder="Enter your comment"
+            value={commentText}
+            onChangeText={(text) => setCommentText(text)}
+          />
+          <Button onPress={handleAddComment}>
+            Send Comment
+          </Button>
+        </Card>
+        {comments.map((comment) => (
+          <Comment
+            key={comment.id}
+            comment={comment}
+            onDelete={handleDeleteComment}
+            onSaveEdit={handleSaveEditComment}
+          />
+        ))}
+      </View>
     </ScrollView>
   );
 };
@@ -68,6 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: '#f5f5f5',
+    marginBottom: 20,
   },
   title: {
     fontSize: 20,

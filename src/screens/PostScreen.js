@@ -43,6 +43,7 @@ const PostScreen = ({ route }) => {
           <Text style={styles.body}>{post.body}</Text>
           <TextInput
             mode="outlined"
+            multiline={true}
             textColor="#000"
             style={styles.input}
             placeholder="Enter your comment"

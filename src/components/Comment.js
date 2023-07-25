@@ -33,6 +33,7 @@ const Comment = ({ comment, onDelete, onSaveEdit }) => {
         <View>
           <TextInput
             textColor="#000"
+            multiline={true}
             mode="outlined"
             style={styles.input}
             value={text}
@@ -67,13 +68,15 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
+    paddingVertical: 12,
     marginBottom: 8,
     color: '#000',
   },
   input: {
     backgroundColor: '#F8F8F8',
     marginBottom: 12,
-    paddingHorizontal: 8,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
   },
 });
 

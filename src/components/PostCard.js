@@ -36,6 +36,8 @@ const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
           />
           <TextInput 
             mode="outlined" 
+            multiline={true}
+            numberOfLines={4}
             textColor="#000" 
             style={styles.input} 
             value={body} 

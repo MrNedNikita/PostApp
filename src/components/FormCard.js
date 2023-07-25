@@ -29,6 +29,7 @@ const FormCard = ({ onAddPost }) => {
         />
         <TextInput
           label="Body"
+          multiline={true}
           mode="outlined"
           textColor="#000"
           style={styles.input}

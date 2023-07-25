@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, ScrollView, Text, View } from 'react-native';
+import { StyleSheet, ScrollView, Text, View, KeyboardAvoidingView } from 'react-native';
 import Comment from '../components/Comment';
 import { createSelector } from 'reselect';
 import { useDispatch, useSelector } from 'react-redux';

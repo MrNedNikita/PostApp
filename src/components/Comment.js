@@ -28,56 +28,76 @@ const Comment = ({ comment, onDelete, onSaveEdit }) => {
   };
 
   return (
-    <Card style={styles.comment}>
+    <View style={styles.comment}>
       {editing ? (
         <View>
           <TextInput
             textColor="#000"
             multiline={true}
-            mode="outlined"
+            mode="flat"
             style={styles.input}
             value={text}
             onChangeText={setText}
           />
-          <Card.Actions>
-            <Button onPress={handleCancel}>Cancel</Button>
-            <Button onPress={handleSave}>Save</Button>
-          </Card.Actions>
+          <View style={styles.buttonsContainer}>
+            <Button
+              mode="text"
+              onPress={handleCancel}
+              style={styles.button}
+            >
+              Cancel
+            </Button>
+            <Button
+              mode="text"
+              onPress={handleSave}
+              style={styles.button}
+            >
+              Save
+            </Button>
+          </View>
         </View>
       ) : (
         <View>
-          <Card.Content>
-            <Text style={styles.text}>{comment.text}</Text>
-          </Card.Content>
-          <Card.Actions>
-            <Button onPress={handleEdit}>Edit</Button>
-            <Button onPress={handleDelete}>Delete</Button>
-          </Card.Actions>
+          <Text style={styles.text}>{comment.text}</Text>
+          <View style={styles.buttonsContainer}>
+            <Button style={styles.button} mode="text" onPress={handleEdit}>Edit</Button>
+            <Button style={styles.button} mode="text" onPress={handleDelete}>Delete</Button>
+          </View>
         </View>
       )}
-    </Card>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   comment: {
     borderRadius: 8,
-    padding: 16,
-    marginBottom: 14,
-    backgroundColor: '#fff',
+    paddingHorizontal: 16,
+    // marginBottom: 14,
+    // backgroundColor: '#fff',
   },
   text: {
     fontSize: 16,
-    paddingVertical: 12,
-    marginBottom: 8,
+    paddingVertical: 22,
+    marginBottom: 2,
+    marginLeft: 22,
     color: '#000',
   },
   input: {
-    backgroundColor: '#F8F8F8',
-    marginBottom: 12,
-    paddingHorizontal: 0,
+    backgroundColor: '#fff',
+    marginBottom: 0,
+    marginHorizontal: 6,
     paddingVertical: 0,
+    paddingLeft: 0,
   },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  button: {
+    width: 80,
+    marginHorizontal: 6,
+  }
 });
 
 export default Comment;

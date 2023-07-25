@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Button, Card, TextInput } from 'react-native-paper';
 
 const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
@@ -27,36 +27,51 @@ const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
     <Card onPress={handlePostPress} style={styles.card}>
       {editing ? (
         <>
-          <TextInput 
-            mode="outlined" 
+          <TextInput
+            mode="outlined"
             textColor="#000"
-            style={styles.input} 
-            value={title} 
-            onChangeText={text => setTitle(text)} 
+            dense
+            style={styles.input}
+            value={title}
+            onChangeText={text => setTitle(text)}
           />
-          <TextInput 
-            mode="outlined" 
+          <TextInput
+            mode="outlined"
             multiline={true}
             numberOfLines={4}
-            textColor="#000" 
-            style={styles.input} 
-            value={body} 
-            onChangeText={text => setBody(text)} 
+            dense
+            textColor="#000"
+            style={styles.input}
+            value={body}
+            onChangeText={text => setBody(text)}
           />
-          <Card.Actions>
-            <Button onPress={handleSave}>Save</Button>
-          </Card.Actions>
+          <View style={styles.buttonsContainer}>
+            <Button
+              style={styles.button}
+              onPress={handleSave}
+            >
+              Save
+            </Button>
+          </View>
         </>
       ) : (
         <>
           <Text style={styles.title}>{title}</Text>
-          <Card.Content>
-            <Text>{body}</Text>
-          </Card.Content>
-          <Card.Actions>
-            <Button onPress={() => onDelete(post.id)}>Delete</Button>
-            <Button onPress={handleEdit}>Edit</Button>
-          </Card.Actions>
+          <Text style={styles.body}>{body}</Text>
+          <View style={styles.buttonsContainer}>
+            <Button
+              style={styles.button}
+              onPress={() => onDelete(post.id)}
+            >
+              Delete
+            </Button>
+            <Button
+              style={styles.button}
+              onPress={handleEdit}
+            >
+              Edit
+            </Button>
+          </View>
         </>
       )}
     </Card>
@@ -73,13 +88,30 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: '#F8F8F8',
     marginBottom: 12,
+    paddingVertical: 0,
+    paddingHorizontal: 0,
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
+    marginTop: 12,
     marginBottom: 8,
     marginLeft: 14,
   },
+  body: {
+    fontSize: 16,
+    marginBottom: 16,
+    marginLeft: 14,
+    marginTop: 24,
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  button: {
+    width: 80,
+    marginHorizontal: 6,
+  }
 });
 
 export default PostCard;

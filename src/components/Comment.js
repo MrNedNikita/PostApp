@@ -35,6 +35,7 @@ const Comment = ({ comment, onDelete, onSaveEdit }) => {
             textColor="#000"
             multiline={true}
             mode="flat"
+            dense
             style={styles.input}
             value={text}
             onChangeText={setText}
@@ -73,13 +74,12 @@ const styles = StyleSheet.create({
   comment: {
     borderRadius: 8,
     paddingHorizontal: 16,
-    // marginBottom: 14,
-    // backgroundColor: '#fff',
+    paddingVertical: 8,
   },
   text: {
     fontSize: 16,
-    paddingVertical: 22,
-    marginBottom: 2,
+    paddingVertical: 2,
+    marginBottom: 10,
     marginLeft: 22,
     color: '#000',
   },
@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginBottom: 0,
     marginHorizontal: 6,
-    paddingVertical: 0,
+    marginVertical: -10,
+    paddingVertical: 2,
     paddingLeft: 0,
   },
   buttonsContainer: {

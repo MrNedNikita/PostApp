@@ -7,8 +7,8 @@ import PostCard from '../components/PostCard';
 import FormCard from '../components/FormCard';
 
 const HomeScreen = ({ navigation }) => {
-  const posts = useSelector((state) => state.posts);
-  const loading = useSelector((state) => state.loading);
+  const posts = useSelector((state) => state.posts.posts);
+  const loading = useSelector((state) => state.posts.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,27 +29,28 @@ const HomeScreen = ({ navigation }) => {
     dispatch(editPost(id, title, body));
   };
 
-  if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#007BFF" />
-      </View>
-    );
-  }
+  console.warn('posts', posts);
+  console.warn('loading', loading);
 
   return (
     <ScrollView scrollVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <FormCard onAddPost={handleAddPost} />
-        {posts.map((post) => (
-          <PostCard
-            key={post.id}
-            post={post}
-            onDelete={handleDelete}
-            onSaveEdit={handleSaveEdit}
-            navigation={navigation}
-          />
-        ))}
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#007BFF" />
+          </View>
+        ) : (
+          posts.map((post) => (
+            <PostCard
+              key={post.id}
+              post={post}
+              onDelete={handleDelete}
+              onSaveEdit={handleSaveEdit}
+              navigation={navigation}
+            />
+          ))
+        )}
       </View>
     </ScrollView>
   );
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 50,
   },
 });
 

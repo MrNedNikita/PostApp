@@ -76,4 +76,3 @@ export const editPost = (id, title, body) => async (dispatch) => {
     dispatch(setLoading(false));
   }
 };
-

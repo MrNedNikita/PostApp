@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, ScrollView, View } from 'react-native';
+import { StyleSheet, ScrollView, View, ActivityIndicator } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPosts, addPost, deletePost, editPost } from '../store/actions/postActions.js';
 import { fetchComments } from '../store/actions/commentActions.js';
 import PostCard from '../components/PostCard';
 import FormCard from '../components/FormCard';
 
-
 const HomeScreen = ({ navigation }) => {
   const posts = useSelector((state) => state.posts);
+  const loading = useSelector((state) => state.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,6 +28,14 @@ const HomeScreen = ({ navigation }) => {
   const handleSaveEdit = (id, title, body) => {
     dispatch(editPost(id, title, body));
   };
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#007BFF" />
+      </View>
+    );
+  }
 
   return (
     <ScrollView scrollVerticalScrollIndicator={false}>
@@ -52,6 +60,11 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: '#f5f5f5',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

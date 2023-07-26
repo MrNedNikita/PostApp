@@ -50,7 +50,7 @@ const PostScreen = ({ route }) => {
             value={commentText}
             onChangeText={(text) => setCommentText(text)}
           />
-          <Button onPress={handleAddComment}>
+          <Button style={styles.button} onPress={handleAddComment}>
             Send Comment
           </Button>
         </Card>
@@ -95,6 +95,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#F8F8F8',
     marginBottom: 12,
     paddingHorizontal: 8,
+  },
+  button: {
+    padding: 0,
+    flex: 1,
+    alignSelf: 'center',
   },
 });
 

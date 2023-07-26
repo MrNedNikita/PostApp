@@ -37,7 +37,7 @@ const FormCard = ({ onAddPost }) => {
           onChangeText={text => setBody(text)}
         />
       </Card.Content>
-      <Button onPress={handleAddPost}>Add Post</Button>
+      <Button style={styles.button} onPress={handleAddPost}>Add Post</Button>
     </Card>
   );
 };
@@ -59,7 +59,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     margin: 14,
     color: '#000',
-
+  },
+  button: {
+    padding: 0,
+    flex: 1,
+    alignSelf: 'center',
   },
 });
 

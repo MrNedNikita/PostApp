@@ -1,5 +1,16 @@
 {
-  "posts": [],
+  "posts": [
+    {
+      "id": 1690986429690,
+      "title": "Asdfsfa",
+      "body": "Asdfsadf"
+    },
+    {
+      "id": 1690986432261,
+      "title": "Sadfsdfasd",
+      "body": "Afsdsfad"
+    }
+  ],
   "comments": [
     {
       "text": "Hhh",

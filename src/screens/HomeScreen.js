@@ -33,7 +33,9 @@ const HomeScreen = ({ navigation }) => {
 
   const deleteTask = () => {
     dispatch(deletePost(postId));
-    hideModal();
+    setTimeout(() => {
+      hideModal();
+    }, 1000);
   }
 
   const handleSaveEdit = (id, title, body) => {

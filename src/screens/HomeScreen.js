@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ScrollView, View, ActivityIndicator } from 'react-native';
-import { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPosts, addPost, deletePost, editPost } from '../store/actions/postActions.js';
 import { fetchComments } from '../store/actions/commentActions.js';
 import PostCard from '../components/PostCard';
 import FormCard from '../components/FormCard';
+import PostModal from '../components/PostModal.js';
 
 const HomeScreen = ({ navigation }) => {
   const posts = useSelector((state) => state.posts.posts);
-  const loading = useSelector((state) => state.posts.loading);
+  const loadingPosts = useSelector((state) => state.posts.loading.fetchPosts);
+  const loadingDeletePost = useSelector((state) => state.posts.loading.deletePost);
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = React.useState(false);
   const [postId, setPostId] = useState(null);
@@ -25,6 +26,7 @@ const HomeScreen = ({ navigation }) => {
   };
 
   const handleDelete = (id) => {
+    console.warn(id);
     setPostId(id);
     showModal();
   };
@@ -38,8 +40,6 @@ const HomeScreen = ({ navigation }) => {
     dispatch(editPost(id, title, body));
   };
 
-  const containerStyle = {backgroundColor: 'white', padding: 20};
-
   const showModal = () => setModalVisible(true);
   const hideModal = () => setModalVisible(false);
 
@@ -47,15 +47,13 @@ const HomeScreen = ({ navigation }) => {
     <ScrollView scrollVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <FormCard onAddPost={handleAddPost} />
-        <Portal>
-          <Modal visible={modalVisible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-            <Text>Confirm Deletion</Text>
-            <Text>Are you sure you want to delete this post?</Text>
-            <Button onPress={deleteTask}>Delete</Button>
-            <Button onPress={hideModal}>Close</Button>
-          </Modal>
-        </Portal>
-        {loading ? (
+        <PostModal
+          modalVisible={modalVisible}
+          hideModal={hideModal}
+          onDelete={deleteTask}
+          loading={loadingDeletePost}
+        />
+        {loadingPosts ? (
           <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color="#007BFF" />
           </View>

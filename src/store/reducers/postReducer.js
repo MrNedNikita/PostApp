@@ -2,7 +2,12 @@ import { FETCH_POSTS, ADD_POST, DELETE_POST, EDIT_POST, SET_LOADING } from '../a
 
 const initialState = {
   posts: [],
-  loading: false,
+  loading: {
+    fetchPosts: false,
+    addPost: false,
+    deletePost: false,
+    editPost: false,
+  },
 };
 
 const postReducer = (state = initialState, action) => {
@@ -10,7 +15,7 @@ const postReducer = (state = initialState, action) => {
     case SET_LOADING:
       return {
         ...state,
-        loading: action.payload,
+        loading: { ...state.loading, ...action.payload },
       };
     case FETCH_POSTS:
       return {
@@ -38,5 +43,8 @@ const postReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export default postReducer;
+
 
 export default postReducer;

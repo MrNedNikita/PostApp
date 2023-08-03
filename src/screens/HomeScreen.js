@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, ScrollView, View, ActivityIndicator } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPosts, addPost, deletePost, editPost } from '../store/actions/postActions.js';
@@ -13,8 +13,9 @@ const HomeScreen = ({ navigation }) => {
   const loadingPosts = useSelector((state) => state.posts.loading.fetchPosts);
   const loadingDeletePost = useSelector((state) => state.posts.loading.deletePost);
   const dispatch = useDispatch();
-  const [modalVisible, setModalVisible] = React.useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const [postId, setPostId] = useState(null);
+  const viewRefs = useRef([]);
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -26,24 +27,27 @@ const HomeScreen = ({ navigation }) => {
     dispatch(addPost(id, title, body));
   };
 
-  const handleDelete = (id) => {
-    console.warn(id);
+  const handleDelete = (id, index) => {
     setPostId(id);
-    showModal();
+    showModal(index);
   };
 
-  const deleteTask = () => {
-    dispatch(deletePost(postId));
-    setTimeout(() => {
+  const deleteTask = (index) => {
+    viewRefs.current[index].fadeOut(300).then(() => {
+      dispatch(deletePost(postId));
       hideModal();
-    }, 1000);
-  }
+    });
+  };
 
   const handleSaveEdit = (id, title, body) => {
     dispatch(editPost(id, title, body));
   };
 
-  const showModal = () => setModalVisible(true);
+  const showModal = (index) => {
+    setModalVisible(true);
+    setPostId(posts[index].id);
+  };
+
   const hideModal = () => setModalVisible(false);
 
   return (
@@ -53,7 +57,7 @@ const HomeScreen = ({ navigation }) => {
         <PostModal
           modalVisible={modalVisible}
           hideModal={hideModal}
-          onDelete={deleteTask}
+          onDelete={() => deleteTask(posts.findIndex(post => post.id === postId))}
           loading={loadingDeletePost}
         />
         {loadingPosts ? (
@@ -65,13 +69,14 @@ const HomeScreen = ({ navigation }) => {
             <Animatable.View
               key={post.id}
               animation="fadeIn"
-              duration={800} 
-              easing="ease-in-out" 
+              duration={800}
+              easing="ease-in-out"
+              ref={ref => viewRefs.current[index] = ref}
               style={styles.postCardContainer}
             >
               <PostCard
                 post={post}
-                onDelete={handleDelete}
+                onDelete={() => handleDelete(post.id, index)}
                 onSaveEdit={handleSaveEdit}
                 navigation={navigation}
               />

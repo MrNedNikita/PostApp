@@ -10,7 +10,7 @@ const PostModal = ({ modalVisible, onDelete, hideModal, loading }) => {
       <Modal visible={modalVisible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
         {loading ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#007BFF" />
+            <ActivityIndicator size="large" color="#5a4499" />
           </View>
         ) : (
           <>

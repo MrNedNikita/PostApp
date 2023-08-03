@@ -57,7 +57,7 @@ const HomeScreen = ({ navigation }) => {
         />
         {loadingPosts ? (
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#007BFF" />
+            <ActivityIndicator size="large" color="#5a4499" />
           </View>
         ) : (
           posts.map((post) => (

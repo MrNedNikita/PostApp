@@ -1,25 +1,31 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { Button, Card, TextInput } from 'react-native-paper';
+import { Button, Card, TextInput, ActivityIndicator } from 'react-native-paper';
 
 const Comment = ({ comment, onDelete, onSaveEdit }) => {
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(comment.text);
+  const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const handleEdit = () => {
     setEditing(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!text) {
       return alert('Please fill all fields!');
     }
-    onSaveEdit(comment.id, text);
+    setSaving(true);
+    await onSaveEdit(comment.id, text);
+    setSaving(false);
     setEditing(false);
   };
 
-  const handleDelete = () => {
-    onDelete(comment.id);
+  const handleDelete = async () => {
+    setDeleting(true);
+    await onDelete(comment.id);
+    setDeleting(false);
   };
 
   const handleCancel = () => {
@@ -28,77 +34,106 @@ const Comment = ({ comment, onDelete, onSaveEdit }) => {
   };
 
   return (
-    <View style={styles.comment}>
-      {editing ? (
-        <View>
-          <TextInput
-            textColor="#000"
-            multiline={true}
-            mode="flat"
-            dense
-            style={styles.input}
-            value={text}
-            onChangeText={setText}
-          />
-          <View style={styles.buttonsContainer}>
-            <Button
-              mode="text"
-              onPress={handleCancel}
-              style={styles.button}
-            >
-              Cancel
-            </Button>
-            <Button
-              mode="text"
-              onPress={handleSave}
-              style={styles.button}
-            >
-              Save
-            </Button>
-          </View>
-        </View>
-      ) : (
-        <View>
-          <Text style={styles.text}>{comment.text}</Text>
-          <View style={styles.buttonsContainer}>
-            <Button style={styles.button} mode="text" onPress={handleEdit}>Edit</Button>
-            <Button style={styles.button} mode="text" onPress={handleDelete}>Delete</Button>
-          </View>
-        </View>
-      )}
-    </View>
+    <Card style={styles.commentContainer}>
+      <View style={styles.commentContent}>
+        {editing ? (
+          <>
+            <TextInput
+              multiline
+              mode="outlined"
+              style={styles.editInput}
+              value={text}
+              onChangeText={setText}
+            />
+            <View style={styles.editButtons}>
+              <Button
+                mode="text"
+                onPress={handleCancel}
+                style={styles.cancelButton}
+                disabled={saving}
+              >
+                Cancel
+              </Button>
+              <Button
+                mode="contained"
+                onPress={handleSave}
+                style={styles.saveButton}
+                loading={saving}
+                disabled={saving}
+              >
+                Save
+              </Button>
+            </View>
+          </>
+        ) : (
+          <>
+            <Text style={styles.commentText}>{comment.text}</Text>
+            <View style={styles.commentButtons}>
+              <Button
+                mode="text"
+                onPress={handleEdit}
+                style={styles.editButton}
+                disabled={deleting}
+              >
+                Edit
+              </Button>
+              <Button
+                mode="contained"
+                onPress={handleDelete}
+                style={styles.deleteButton}
+                loading={deleting}
+                disabled={deleting}
+              >
+                Delete
+              </Button>
+            </View>
+          </>
+        )}
+      </View>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create({
-  comment: {
-    borderRadius: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+  commentContainer: {
+    marginVertical: 8,
+    borderRadius: 12,
+    elevation: 2,
   },
-  text: {
+  commentContent: {
+    padding: 16,
+  },
+  commentText: {
     fontSize: 16,
-    paddingVertical: 2,
+    color: '#333',
     marginBottom: 10,
-    marginLeft: 22,
-    color: '#000',
   },
-  input: {
-    backgroundColor: '#fff',
-    marginBottom: 0,
-    marginHorizontal: 6,
-    marginVertical: -10,
-    paddingVertical: 2,
-    paddingLeft: 0,
+  editInput: {
+    backgroundColor: '#f0f0f0',
+    marginBottom: 8,
   },
-  buttonsContainer: {
+  editButtons: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
-  button: {
-    width: 80,
-    marginHorizontal: 6,
-  }
+  cancelButton: {
+    marginRight: 8,
+    color: '#888',
+  },
+  saveButton: {
+    backgroundColor: '#333',
+  },
+  commentButtons: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  editButton: {
+    color: '#007AFF',
+    marginRight: 8,
+  },
+  deleteButton: {
+    color: '#FF3B30',
+  },
 });
 
 export default Comment;

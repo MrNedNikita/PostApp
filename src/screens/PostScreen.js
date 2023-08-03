@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet, ScrollView, Text, View, KeyboardAvoidingView } from 'react-native';
-import Comment from '../components/Comment';
+import { StyleSheet, ScrollView, Text, View } from 'react-native';
+import { Button, TextInput, Card, ActivityIndicator } from 'react-native-paper';
+import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from 'reselect';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button, TextInput, Card } from 'react-native-paper';
-import { addComment, deleteComment, editComment } from '../store/actions/commentActions.js';
+import Comment from '../components/Comment';
+import { addComment, deleteComment, editComment } from '../store/actions/commentActions';
 
 const PostScreen = ({ route }) => {
   const { post } = route.params;
   const [commentText, setCommentText] = useState('');
+
   const selectPostComments = createSelector(
     (state) => state.comments,
     (_, postId) => postId,
@@ -18,21 +19,25 @@ const PostScreen = ({ route }) => {
   const comments = useSelector((state) => selectPostComments(state, post.id));
   const dispatch = useDispatch();
 
-  const handleAddComment = () => {
+  const [savingComment, setSavingComment] = useState(false);
+
+  const handleAddComment = async () => {
     if (!commentText) {
       return alert('Please fill all fields!');
     }
+    setSavingComment(true);
     const id = new Date().getTime();
-    dispatch(addComment(id, commentText, post.id));
+    await dispatch(addComment(id, commentText, post.id));
+    setSavingComment(false);
     setCommentText('');
   };
 
-  const handleDeleteComment = (id) => {
-    dispatch(deleteComment(id))
+  const handleDeleteComment = async (commentId) => {
+    await dispatch(deleteComment(commentId));
   };
 
-  const handleSaveEditComment = (id, text) => {
-    dispatch(editComment(id, text, post.id));
+  const handleSaveEditComment = async (commentId, newText) => {
+    await dispatch(editComment(commentId, newText, post.id));
   };
 
   return (
@@ -50,8 +55,12 @@ const PostScreen = ({ route }) => {
             value={commentText}
             onChangeText={(text) => setCommentText(text)}
           />
-          <Button style={styles.button} onPress={handleAddComment}>
-            Send Comment
+          <Button
+            style={styles.button}
+            onPress={handleAddComment}
+            disabled={savingComment}
+          >
+            {savingComment ? <ActivityIndicator color="#5a4499" /> : 'Send Comment'}
           </Button>
         </Card>
         {comments.map((comment) => (
@@ -100,6 +109,7 @@ const styles = StyleSheet.create({
     padding: 0,
     flex: 1,
     alignSelf: 'center',
+    height: 40,
   },
 });
 

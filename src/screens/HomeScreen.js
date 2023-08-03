@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, ScrollView, View, ActivityIndicator } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import * as Animatable from 'react-native-animatable';
+
 import { fetchPosts, addPost, deletePost, editPost } from '../store/actions/postActions.js';
 import { fetchComments } from '../store/actions/commentActions.js';
 import FormCard from '../components/FormCard';
 import PostModal from '../components/PostModal.js';
-import * as Animatable from 'react-native-animatable';
 import PostCard from '../components/PostCard';
 
 const HomeScreen = ({ navigation }) => {
@@ -50,6 +51,33 @@ const HomeScreen = ({ navigation }) => {
 
   const hideModal = () => setModalVisible(false);
 
+  const renderSkeleton = () => (
+    <View style={styles.skeletonContainer}>
+      {[1, 2, 3].map((_, index) => (
+        <View key={index} style={styles.skeletonCard} />
+      ))}
+    </View>
+  );
+
+  const renderPostCards = () =>
+    posts.map((post, index) => (
+      <Animatable.View
+        key={post.id}
+        animation="fadeIn"
+        duration={800}
+        easing="ease-in-out"
+        ref={(ref) => (viewRefs.current[index] = ref)}
+        style={styles.postCardContainer}
+      >
+        <PostCard
+          post={post}
+          onDelete={() => handleDelete(post.id, index)}
+          onSaveEdit={handleSaveEdit}
+          navigation={navigation}
+        />
+      </Animatable.View>
+    ));
+
   return (
     <ScrollView scrollVerticalScrollIndicator={false}>
       <View style={styles.container}>
@@ -57,32 +85,10 @@ const HomeScreen = ({ navigation }) => {
         <PostModal
           modalVisible={modalVisible}
           hideModal={hideModal}
-          onDelete={() => deleteTask(posts.findIndex(post => post.id === postId))}
+          onDelete={() => deleteTask(posts.findIndex((post) => post.id === postId))}
           loading={loadingDeletePost}
         />
-        {loadingPosts ? (
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#5a4499" />
-          </View>
-        ) : (
-          posts.map((post, index) => (
-            <Animatable.View
-              key={post.id}
-              animation="fadeIn"
-              duration={800}
-              easing="ease-in-out"
-              ref={ref => viewRefs.current[index] = ref}
-              style={styles.postCardContainer}
-            >
-              <PostCard
-                post={post}
-                onDelete={() => handleDelete(post.id, index)}
-                onSaveEdit={handleSaveEdit}
-                navigation={navigation}
-              />
-            </Animatable.View>
-          ))
-        )}
+        {loadingPosts ? renderSkeleton() : renderPostCards()}
       </View>
     </ScrollView>
   );
@@ -94,11 +100,17 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#f5f5f5',
   },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 50,
+  skeletonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+  },
+  skeletonCard: {
+    width: '100%',
+    height: 170,
+    backgroundColor: '#ddd',
+    marginBottom: 24,
+    borderRadius: 8,
   },
   postCardContainer: {
     marginBottom: 10,

@@ -17,15 +17,18 @@ const HomeScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [postId, setPostId] = useState(null);
   const viewRefs = useRef([]);
+  const [savingPost, setSavingPost] = useState(false);
 
   useEffect(() => {
     dispatch(fetchPosts());
     dispatch(fetchComments());
   }, [dispatch]);
 
-  const handleAddPost = (title, body) => {
+  const handleAddPost = async (title, body) => {
+    setSavingPost(true);
     const id = new Date().getTime();
-    dispatch(addPost(id, title, body));
+    await dispatch(addPost(id, title, body));
+    setSavingPost(false);
   };
 
   const handleDelete = (id, index) => {
@@ -81,7 +84,10 @@ const HomeScreen = ({ navigation }) => {
   return (
     <ScrollView scrollVerticalScrollIndicator={false}>
       <View style={styles.container}>
-        <FormCard onAddPost={handleAddPost} />
+        <FormCard 
+          onAddPost={handleAddPost} 
+          savingPost={savingPost}
+        />
         <PostModal
           modalVisible={modalVisible}
           hideModal={hideModal}

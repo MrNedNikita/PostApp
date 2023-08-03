@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, Text } from 'react-native';
-import { Card, TextInput, Button } from "react-native-paper";
+import { Card, TextInput, Button, ActivityIndicator } from "react-native-paper";
 
-const FormCard = ({ onAddPost }) => {
+const FormCard = ({ onAddPost, savingPost }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
@@ -37,7 +37,13 @@ const FormCard = ({ onAddPost }) => {
           onChangeText={text => setBody(text)}
         />
       </Card.Content>
-      <Button style={styles.button} onPress={handleAddPost}>Add Post</Button>
+      <Button 
+        style={styles.button} 
+        onPress={handleAddPost}
+        disabled={savingPost}
+      >
+        {savingPost ? <ActivityIndicator color="#5a4499" /> : 'Add Post'}
+      </Button>
     </Card>
   );
 };
@@ -64,6 +70,7 @@ const styles = StyleSheet.create({
     padding: 0,
     flex: 1,
     alignSelf: 'center',
+    height: 40,
   },
 });
 

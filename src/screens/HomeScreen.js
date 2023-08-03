@@ -3,9 +3,10 @@ import { StyleSheet, ScrollView, View, ActivityIndicator } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPosts, addPost, deletePost, editPost } from '../store/actions/postActions.js';
 import { fetchComments } from '../store/actions/commentActions.js';
-import PostCard from '../components/PostCard';
 import FormCard from '../components/FormCard';
 import PostModal from '../components/PostModal.js';
+import * as Animatable from 'react-native-animatable';
+import PostCard from '../components/PostCard';
 
 const HomeScreen = ({ navigation }) => {
   const posts = useSelector((state) => state.posts.posts);
@@ -60,14 +61,21 @@ const HomeScreen = ({ navigation }) => {
             <ActivityIndicator size="large" color="#5a4499" />
           </View>
         ) : (
-          posts.map((post) => (
-            <PostCard
+          posts.map((post, index) => (
+            <Animatable.View
               key={post.id}
-              post={post}
-              onDelete={handleDelete}
-              onSaveEdit={handleSaveEdit}
-              navigation={navigation}
-            />
+              animation="fadeIn"
+              duration={800} 
+              easing="ease-in-out" 
+              style={styles.postCardContainer}
+            >
+              <PostCard
+                post={post}
+                onDelete={handleDelete}
+                onSaveEdit={handleSaveEdit}
+                navigation={navigation}
+              />
+            </Animatable.View>
           ))
         )}
       </View>
@@ -86,6 +94,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 50,
+  },
+  postCardContainer: {
+    marginBottom: 10,
   },
 });
 

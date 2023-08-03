@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { StyleSheet, ScrollView, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, ScrollView, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
-
 import { fetchPosts, addPost, deletePost, editPost } from '../store/actions/postActions.js';
 import { fetchComments } from '../store/actions/commentActions.js';
 import FormCard from '../components/FormCard';

@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import { Button, TextInput, Card, ActivityIndicator } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from 'reselect';
 import Comment from '../components/Comment';
+import * as Animatable from 'react-native-animatable';
 import { addComment, deleteComment, editComment } from '../store/actions/commentActions';
 
 const PostScreen = ({ route }) => {
   const { post } = route.params;
   const [commentText, setCommentText] = useState('');
+  const viewRefs = useRef([]);
 
   const selectPostComments = createSelector(
     (state) => state.comments,
@@ -32,7 +34,8 @@ const PostScreen = ({ route }) => {
     setCommentText('');
   };
 
-  const handleDeleteComment = async (commentId) => {
+  const handleDeleteComment = async (commentId, index) => {
+    await viewRefs.current[index].fadeOut(300);
     await dispatch(deleteComment(commentId));
   };
 
@@ -63,13 +66,22 @@ const PostScreen = ({ route }) => {
             {savingComment ? <ActivityIndicator color="#5a4499" /> : 'Send Comment'}
           </Button>
         </Card>
-        {comments.map((comment) => (
-          <Comment
+        {comments.map((comment, index) => (
+          <Animatable.View
             key={comment.id}
-            comment={comment}
-            onDelete={handleDeleteComment}
-            onSaveEdit={handleSaveEditComment}
-          />
+            animation="fadeIn"
+            duration={800}
+            easing="ease-in-out"
+            ref={(ref) => (viewRefs.current[index] = ref)}
+            style={styles.commentCardContainer}
+          >
+            <Comment
+              key={comment.id}
+              comment={comment}
+              onDelete={() => handleDeleteComment(comment.id, index)}
+              onSaveEdit={handleSaveEditComment}
+            />
+          </Animatable.View>
         ))}
       </View>
     </ScrollView>

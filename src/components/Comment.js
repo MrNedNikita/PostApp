@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { Button, Card, TextInput, ActivityIndicator } from 'react-native-paper';
+import { View, StyleSheet, Text, TextInput } from 'react-native';
+import { Button, Card, ActivityIndicator } from 'react-native-paper';
 
 const Comment = ({ comment, onDelete, onSaveEdit }) => {
   const [editing, setEditing] = useState(false);
@@ -58,10 +58,9 @@ const Comment = ({ comment, onDelete, onSaveEdit }) => {
                 mode="contained"
                 onPress={handleSave}
                 style={styles.saveButton}
-                loading={saving}
                 disabled={saving}
               >
-                Save
+                {saving ? <ActivityIndicator color="#fff" /> : 'Save'}
               </Button>
             </View>
           </>
@@ -81,10 +80,9 @@ const Comment = ({ comment, onDelete, onSaveEdit }) => {
                 mode="contained"
                 onPress={handleDelete}
                 style={styles.deleteButton}
-                loading={deleting}
                 disabled={deleting}
               >
-                Delete
+                {deleting ? <ActivityIndicator color="#fff" /> : 'Delete'}
               </Button>
             </View>
           </>
@@ -107,10 +105,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
     marginBottom: 10,
+    padding: 5,
+    paddingLeft: 2,
+    paddingBottom: 6,
   },
   editInput: {
     backgroundColor: '#f0f0f0',
-    marginBottom: 8,
+    marginBottom: 10,
+    fontSize: 16,
+    padding: 6,
+    paddingLeft: 2,
   },
   editButtons: {
     flexDirection: 'row',
@@ -119,9 +123,11 @@ const styles = StyleSheet.create({
   cancelButton: {
     marginRight: 8,
     color: '#888',
+    height: 40,
   },
   saveButton: {
     backgroundColor: '#333',
+    height: 40,
   },
   commentButtons: {
     flexDirection: 'row',
@@ -130,9 +136,11 @@ const styles = StyleSheet.create({
   editButton: {
     color: '#007AFF',
     marginRight: 8,
+    height: 40,
   },
   deleteButton: {
     color: '#FF3B30',
+    height: 40,
   },
 });
 

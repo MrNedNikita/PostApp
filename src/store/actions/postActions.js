@@ -4,8 +4,8 @@ export const DELETE_POST = 'DELETE_POST';
 export const EDIT_POST = 'EDIT_POST';
 export const SET_LOADING = 'SET_LOADING';
 
-// const API_BASE_URL = 'https://my-json-server.typicode.com/MrNedNikita/PostApp/blob/main';
-const API_BASE_URL = 'https://my-json-server.typicode.com/MrNedNikita/fakeServer';
+const API_BASE_URL = 'https://my-json-server.typicode.com/MrNedNikita/PostApp/blob/main';
+// const API_BASE_URL = 'https://my-json-server.typicode.com/MrNedNikita/fakeServer';
 // const API_BASE_URL = 'http://localhost:3000';
 
 export const setLoading = (name, isLoading) => ({

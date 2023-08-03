@@ -4,18 +4,18 @@ import { Modal, Portal, Text, Button, ActivityIndicator } from 'react-native-pap
 
 const { width } = Dimensions.get("window");
 
-const PostModal = ({ modalVisible, onDelete, hideModal, loading }) => {
+const PostModal = ({ modalVisible, onDelete, hideModal, loading, deleting }) => {
   const containerStyle = { ...styles.container, width: width * 0.8 };
   const buttonContainerStyle = styles.buttonContainer;
 
   return (
     <Portal>
       <Modal visible={modalVisible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-        {loading ? (
+        {/* {loading ? (
           <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color="#5a4499" />
           </View>
-        ) : (
+        ) : ( */}
           <View style={styles.modalContent}>
             <Text style={styles.title}>Confirm Deletion</Text>
             <Text style={styles.subtitle}>Are you sure you want to delete this post?</Text>
@@ -35,11 +35,11 @@ const PostModal = ({ modalVisible, onDelete, hideModal, loading }) => {
                 style={styles.deleteButton}
                 labelStyle={styles.buttonLabel}
               >
-                Delete
+                {deleting ? <ActivityIndicator color="#fff" /> : 'Delete'}
               </Button>
             </View>
           </View>
-        )}
+        {/* )} */}
       </Modal>
     </Portal>
   );
@@ -80,7 +80,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: '#777',
   },
-  deleteButton: {},
+  deleteButton: {
+    height: 40,
+  },
   closeButton: {
     borderColor: '#5a4499',
     marginRight: 10,

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text } from 'react-native';
 import { Card, TextInput, Button, ActivityIndicator } from "react-native-paper";
 
-const FormCard = ({ onAddPost, savingPost }) => {
+const FormCard = ({ onAddPost, addingPost }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
@@ -40,9 +40,9 @@ const FormCard = ({ onAddPost, savingPost }) => {
       <Button 
         style={styles.button} 
         onPress={handleAddPost}
-        disabled={savingPost}
+        disabled={addingPost}
       >
-        {savingPost ? <ActivityIndicator color="#5a4499" /> : 'Add Post'}
+        {addingPost ? <ActivityIndicator color="#5a4499" /> : 'Add Post'}
       </Button>
     </Card>
   );

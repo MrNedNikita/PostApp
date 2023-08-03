@@ -35,8 +35,9 @@ const PostScreen = ({ route }) => {
   };
 
   const handleDeleteComment = async (commentId, index) => {
-    await viewRefs.current[index].fadeOut(300);
-    await dispatch(deleteComment(commentId));
+    await viewRefs.current[index].fadeOut(900).then(() => {
+      dispatch(deleteComment(commentId));
+    });
   };
 
   const handleSaveEditComment = async (commentId, newText) => {

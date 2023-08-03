@@ -7,16 +7,19 @@ import { fetchComments } from '../store/actions/commentActions.js';
 import FormCard from '../components/FormCard';
 import PostModal from '../components/PostModal.js';
 import PostCard from '../components/PostCard';
+// import { set } from 'react-native-reanimated';
 
 const HomeScreen = ({ navigation }) => {
   const posts = useSelector((state) => state.posts.posts);
   const loadingPosts = useSelector((state) => state.posts.loading.fetchPosts);
-  const loadingDeletePost = useSelector((state) => state.posts.loading.deletePost);
+  // const loadingDeletePost = useSelector((state) => state.posts.loading.deletePost);
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const [postId, setPostId] = useState(null);
   const viewRefs = useRef([]);
+  const [addingPost, setAddingPost] = useState(false);
   const [savingPost, setSavingPost] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -24,10 +27,10 @@ const HomeScreen = ({ navigation }) => {
   }, [dispatch]);
 
   const handleAddPost = async (title, body) => {
-    setSavingPost(true);
+    setAddingPost(true);
     const id = new Date().getTime();
     await dispatch(addPost(id, title, body));
-    setSavingPost(false);
+    setAddingPost(false);
   };
 
   const handleDelete = (id, index) => {
@@ -35,15 +38,18 @@ const HomeScreen = ({ navigation }) => {
     showModal(index);
   };
 
-  const deleteTask = (index) => {
-    viewRefs.current[index].fadeOut(300).then(() => {
-      dispatch(deletePost(postId));
-      hideModal();
-    });
+  const deleteTask = async (index) => {
+    setDeleting(true);
+    await viewRefs.current[index].fadeOut(300)
+    await dispatch(deletePost(postId));
+    setDeleting(false);
+    hideModal();
   };
 
-  const handleSaveEdit = (id, title, body) => {
-    dispatch(editPost(id, title, body));
+  const handleSaveEdit = async (id, title, body) => {
+    setSavingPost(true);
+    await dispatch(editPost(id, title, body));
+    setSavingPost(false);
   };
 
   const showModal = (index) => {
@@ -76,6 +82,7 @@ const HomeScreen = ({ navigation }) => {
           onDelete={() => handleDelete(post.id, index)}
           onSaveEdit={handleSaveEdit}
           navigation={navigation}
+          savingPost={savingPost}
         />
       </Animatable.View>
     ));
@@ -83,15 +90,15 @@ const HomeScreen = ({ navigation }) => {
   return (
     <ScrollView scrollVerticalScrollIndicator={false}>
       <View style={styles.container}>
-        <FormCard 
-          onAddPost={handleAddPost} 
-          savingPost={savingPost}
+        <FormCard
+          onAddPost={handleAddPost}
+          addingPost={addingPost}
         />
         <PostModal
           modalVisible={modalVisible}
           hideModal={hideModal}
           onDelete={() => deleteTask(posts.findIndex((post) => post.id === postId))}
-          loading={loadingDeletePost}
+          deleting={deleting}
         />
         {loadingPosts ? renderSkeleton() : renderPostCards()}
       </View>

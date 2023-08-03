@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 
-const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
+const PostCard = ({ post, onDelete, onSaveEdit, navigation, savingPost }) => {
   const [editing, setEditing] = useState(false);
   const [title, setTitle] = useState(post.title);
   const [body, setBody] = useState(post.body);
@@ -52,8 +52,9 @@ const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
               style={styles.saveButton}
               mode="contained"
               onPress={handleSave}
+              disabled={savingPost}
             >
-              Save
+              {savingPost ? <ActivityIndicator color="#fff" /> : 'Save'}
             </Button>
           </View>
         </>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button, Card, TextInput } from 'react-native-paper';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { Button, Card } from 'react-native-paper';
 
 const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
   const [editing, setEditing] = useState(false);
@@ -34,6 +34,7 @@ const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
             style={styles.input}
             value={title}
             onChangeText={text => setTitle(text)}
+            placeholder="Title"
           />
           <TextInput
             mode="outlined"
@@ -44,10 +45,12 @@ const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
             style={styles.input}
             value={body}
             onChangeText={text => setBody(text)}
+            placeholder="Write your post here..."
           />
           <View style={styles.buttonsContainer}>
             <Button
-              style={styles.button}
+              style={styles.saveButton}
+              mode="contained"
               onPress={handleSave}
             >
               Save
@@ -60,13 +63,15 @@ const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
           <Text style={styles.body}>{body}</Text>
           <View style={styles.buttonsContainer}>
             <Button
-              style={styles.button}
+              style={styles.deleteButton}
+              mode="outlined"
               onPress={() => onDelete(post.id)}
             >
               Delete
             </Button>
             <Button
-              style={styles.button}
+              style={styles.editButton}
+              mode="contained"
               onPress={handleEdit}
             >
               Edit
@@ -80,39 +85,48 @@ const PostCard = ({ post, onDelete, onSaveEdit, navigation }) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#fff',
-    borderRadius: 8,
+    backgroundColor: '#ffffff',
     padding: 16,
     marginBottom: 16,
   },
   input: {
-    backgroundColor: '#F8F8F8',
-    marginBottom: 12,
-    paddingVertical: 0,
-    paddingHorizontal: 0,
+    backgroundColor: '#f0f0f0',
+    fontSize: 16,
+    marginBottom: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 4,
+    borderRadius: 4,
   },
   title: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginTop: 12,
-    marginBottom: 8,
-    marginLeft: 14,
+    marginBottom: 12,
+    marginTop: 2,
+    color: '#333333',
+    padding: 4,
   },
   body: {
     fontSize: 16,
-    marginBottom: 16,
-    marginLeft: 14,
-    marginTop: 24,
+    color: '#555555',
+    marginBottom: 15,
+    padding: 4,
   },
   buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    alignItems: 'center',
   },
-  button: {
-    width: 80,
-    marginHorizontal: 6,
-  }
+  deleteButton: {
+    marginHorizontal: 8,
+    height: 40,
+  },
+  editButton: {
+    marginHorizontal: 8,
+    height: 40,
+  },
+  saveButton: {
+    height: 40,
+  },
 });
 
 export default PostCard;
-

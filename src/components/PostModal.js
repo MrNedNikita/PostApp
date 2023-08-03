@@ -1,9 +1,12 @@
-import { View, ActivityIndicator, StyleSheet } from "react-native";
 import React from "react";
-import { Modal, Portal, Text, Button } from 'react-native-paper';
+import { View, StyleSheet, Dimensions } from "react-native";
+import { Modal, Portal, Text, Button, ActivityIndicator } from 'react-native-paper';
+
+const { width } = Dimensions.get("window");
 
 const PostModal = ({ modalVisible, onDelete, hideModal, loading }) => {
-  const containerStyle = { backgroundColor: 'white', padding: 20 };
+  const containerStyle = { ...styles.container, width: width * 0.8 };
+  const buttonContainerStyle = styles.buttonContainer;
 
   return (
     <Portal>
@@ -13,12 +16,29 @@ const PostModal = ({ modalVisible, onDelete, hideModal, loading }) => {
             <ActivityIndicator size="large" color="#5a4499" />
           </View>
         ) : (
-          <>
-            <Text>Confirm Deletion</Text>
-            <Text>Are you sure you want to delete this post?</Text>
-            <Button onPress={onDelete}>Delete</Button>
-            <Button onPress={hideModal}>Close</Button>
-          </>
+          <View style={styles.modalContent}>
+            <Text style={styles.title}>Confirm Deletion</Text>
+            <Text style={styles.subtitle}>Are you sure you want to delete this post?</Text>
+            <View style={buttonContainerStyle}>
+
+              <Button
+                mode="outlined"
+                onPress={hideModal}
+                style={styles.closeButton}
+                labelStyle={styles.buttonLabel}
+              >
+                Close
+              </Button>
+              <Button
+                mode="contained"
+                onPress={onDelete}
+                style={styles.deleteButton}
+                labelStyle={styles.buttonLabel}
+              >
+                Delete
+              </Button>
+            </View>
+          </View>
         )}
       </Modal>
     </Portal>
@@ -26,12 +46,47 @@ const PostModal = ({ modalVisible, onDelete, hideModal, loading }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 12,
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginTop: 20,
+  },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 50,
     marginBottom: 50,
+  },
+  modalContent: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 20,
+    color: '#777',
+  },
+  deleteButton: {},
+  closeButton: {
+    borderColor: '#5a4499',
+    marginRight: 10,
+  },
+  buttonLabel: {
+    fontSize: 16,
   },
 });
 

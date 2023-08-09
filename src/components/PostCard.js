@@ -39,7 +39,6 @@ const PostCard = ({ post, onDelete, onSaveEdit, navigation, savingPost }) => {
           <TextInput
             mode="outlined"
             multiline={true}
-            numberOfLines={4}
             dense
             textColor="#000"
             style={styles.input}

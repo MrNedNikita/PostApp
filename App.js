@@ -9,6 +9,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import PostScreen from './src/screens/PostScreen';
 import postReducer from './src/store/reducers/postReducer';
 import commentReducer from './src/store/reducers/commentReducer';
+// import { ToastProvider } from 'react-native-toast-message';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,16 +32,18 @@ function App() {
   return (
     <Provider store={store}>
       <PaperProvider>
-        <NavigationContainer theme={CustomBackground}>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Posts' }} />
-            <Stack.Screen
-              name="Post"
-              component={PostScreen}
-              options={({ route }) => ({ title: route.params.post.title })}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+        {/* <ToastProvider> */}
+          <NavigationContainer theme={CustomBackground}>
+            <Stack.Navigator initialRouteName="Home">
+              <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Posts' }} />
+              <Stack.Screen
+                name="Post"
+                component={PostScreen}
+                options={({ route }) => ({ title: route.params.post.title })}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        {/* </ToastProvider> */}
       </PaperProvider>
     </Provider>
   );

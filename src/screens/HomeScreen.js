@@ -7,6 +7,7 @@ import { fetchComments } from '../store/actions/commentActions.js';
 import FormCard from '../components/FormCard';
 import PostModal from '../components/PostModal.js';
 import PostCard from '../components/PostCard';
+// import Toast from 'react-native-toast-message';
 // import { set } from 'react-native-reanimated';
 
 const HomeScreen = ({ navigation }) => {
@@ -20,6 +21,7 @@ const HomeScreen = ({ navigation }) => {
   const [addingPost, setAddingPost] = useState(false);
   const [savingPost, setSavingPost] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  // const [showSuccessToaster, setShowSuccessToaster] = useState(false);
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -40,10 +42,11 @@ const HomeScreen = ({ navigation }) => {
 
   const deleteTask = async (index) => {
     setDeleting(true);
-    await viewRefs.current[index].fadeOut(300)
+    await viewRefs.current[index].fadeOut(300);
     await dispatch(deletePost(postId));
     setDeleting(false);
     hideModal();
+    // setShowSuccessToaster(true);
   };
 
   const handleSaveEdit = async (id, title, body) => {
@@ -100,6 +103,7 @@ const HomeScreen = ({ navigation }) => {
           onDelete={() => deleteTask(posts.findIndex((post) => post.id === postId))}
           deleting={deleting}
         />
+        {/* <Toast style={styles.toast} ref={(ref) => Toast.setRef(ref)} /> */}
         {loadingPosts ? renderSkeleton() : renderPostCards()}
       </View>
     </ScrollView>
@@ -127,6 +131,10 @@ const styles = StyleSheet.create({
   postCardContainer: {
     marginBottom: 10,
   },
+  toast: {
+    zIndex: 1,
+  },
+
 });
 
 export default HomeScreen;
